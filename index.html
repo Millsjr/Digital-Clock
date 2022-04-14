@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Digital Clock Build</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    </head>
+    <body>
+
+
+        <div id="clock" data-format="12">
+            <div id='time_container'></div>
+            <button id='toggle_button' data-format="24">Switch Time Format</button>
+
+            <button id="ColorButton">Change Color Format</button>
+
+          <h2>EASE Logistics Digital Clock</h2>
+
+          <div id="time">
+            <div><span id="hour">00</span><span>Hours</span></div>
+            <div><span id="minutes">00</span><span>Minutes</span></div>
+            <div><span id="seconds">00</span><span>Seconds</span></div>
+            <div><span id="ampm">AM</span></div>
+          </div>
+        </div>
+
+
+  <div class="dropdown">
+    <button class="dropbtnZone">Time Zone</button>
+    <div class="dropdown-content">
+        <button class="button Color1">Timezone</button>
+        <button class="button Color2">Timezone</button>
+        <button class="button Color3">Timezone</button>
+        <button class="button Color4">Timezone</button>
+        <button class="button Color5">Timezone</button>
+    </div>
+  </div>
+
+        <script type="text/javascript">
+
+
+        //JavaScript for the switch clock funtion
+
+        function clock(){
+
+            var hours = document.getElementById('hour');
+            var minutes = document.getElementById('minutes');
+            var seconds = document.getElementById('seconds');
+            var ampm = document.getElementById('ampm');
+        
+        
+            var h = new Date().getHours();
+            var m = new Date().getMinutes();
+            var s = new Date().getSeconds();
+            var am = "AM";
+        
+        
+            hours.innerHTML = h <10?'0'+h:h;
+            minutes.innerHTML = m <10?'0'+m:m;
+            seconds.innerHTML = s <10?'0'+s:s;
+            ampm.innerHTML = am;
+        
+        }
+        
+        var interval = setInterval(clock, 1000);
+
+    
+        //change the color of the clock
+        const Colorbutton = document.getElementById('ColorButton');
+        let content = ['hour', 'minutes', 'seconds', 'ampm'];
+        
+        
+        let index = 0;
+        
+        const colors = ['white', '#e6ad22', '#313233', '#707372', 'e8e9e9', 'purple', 'orange', 'teal', 'yellow', 'red'];
+        
+        
+        ColorButton.addEventListener('click', function onClick() {
+          hour.style.text = colors[index];
+          hour.style.color = colors[index]
+          minutes.style.text = colors[index];
+          minutes.style.color = colors[index]
+          seconds.style.text = colors[index];
+          seconds.style.color = colors[index]
+          ampm.style.text = colors[index];
+          ampm.style.color = colors[index]
+          ColorButton.style.backgroundColor = colors[index];
+          ColorButton.style.color = 'black';
+        
+          index = index >= colors.length - 1 ? 0 : index + 1;
+        });
+
+        //Alter the format of the clock
+        const toogle_button = document.getElementById('toogle_button');
+    
+        var h = new Date().getHours();
+        var m = new Date().getMinutes();
+        var s = new Date().getSeconds();
+        var am = "AM";
+    
+
+        hours.innerHTML = h
+        minutes.innerHTML = m
+        seconds.innerHTML = s
+        ampm.innerHTML = am; 
+
+        //Ability to change the Time Zone/Date
+        const dropdown = document.getElementById('dropdown');
+
+        var abbrs = {
+            EST : 'Eastern Standard Time',
+            EDT : 'Eastern Daylight Time',
+            CST : 'Central Standard Time',
+            CDT : 'Central Daylight Time',
+            MST : 'Mountain Standard Time',
+            MDT : 'Mountain Daylight Time',
+            PST : 'Pacific Standard Time',
+            PDT : 'Pacific Daylight Time',
+        };
+        
+        moment.fn.zoneName = function () {
+            var abbr = this.zoneAbbr();
+            return abbrs[abbr] || abbr;
+        };
+        
+        moment.tz([2012, 0], 'America/New_York').format('zz');    // Eastern Standard Time
+        moment.tz([2012, 5], 'America/New_York').format('zz');    // Eastern Daylight Time
+        moment.tz([2012, 0], 'America/Los_Angeles').format('zz'); // Pacific Standard Time
+        moment.tz([2012, 5], 'America/Los_Angeles').format('zz'); // Pacific Daylight Time
+        
+        </script>
+    </body>
+</html>
